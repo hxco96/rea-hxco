@@ -1,0 +1,27 @@
+name: Mobile AI Agent Developer
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  run-agent:
+    if: contains(github.event.issue.labels.*.name, 'build-feature')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Base
+        uses: actions/checkout@v4
+
+      - name: Initialize Open-Source Coding Agent
+        uses: vercel-labs/coding-agent-template@main
+        with:
+          agent-prompt: ${{ github.event.issue.body }}
+          api-key: ${{ secrets.OPENROUTER_API_KEY }}
+          fallback-model: "qwen/qwen-2.5-coder-32b-instruct"
+
+      - name: Commit and Push Changes Natively
+        run: |
+          git config --global user.name "AI Mobile Agent"
+          git config --global user.email "agent@github.com"
+          git add .
+          git commit -m "AI Agent executed request from Issue #${{ github.event.issue.number }}"
+          git push
