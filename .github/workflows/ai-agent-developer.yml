@@ -1,27 +1,39 @@
-name: Mobile AI Agent Developer
+name: AI agent for build-feature issues
+
+# Runs only when the repository owner adds the build-feature label to an issue.
+# Editing an issue does not re-run the agent, and other users cannot trigger it.
 on:
   issues:
-    types: [opened, edited]
+    types: [labeled]
+
+permissions:
+  contents: write # push to a claude/ branch, never main
+  pull-requests: write
+  issues: write # progress comment on the issue
+  id-token: write # required by claude-code-action
+
+concurrency:
+  group: ai-agent-issue-${{ github.event.issue.number }}
+  cancel-in-progress: false
 
 jobs:
   run-agent:
-    if: contains(github.event.issue.labels.*.name, 'build-feature')
-    runs-on: ubuntu-latest
+    if: >-
+      github.event.label.name == 'build-feature' &&
+      github.event.sender.login == github.repository_owner
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
-      - name: Checkout Code Base
-        uses: actions/checkout@v4
-
-      - name: Initialize Open-Source Coding Agent
-        uses: vercel-labs/coding-agent-template@main
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
-          agent-prompt: ${{ github.event.issue.body }}
-          api-key: ${{ secrets.OPENROUTER_API_KEY }}
-          fallback-model: "qwen/qwen-2.5-coder-32b-instruct"
+          fetch-depth: 1
 
-      - name: Commit and Push Changes Natively
-        run: |
-          git config --global user.name "AI Mobile Agent"
-          git config --global user.email "agent@github.com"
-          git add .
-          git commit -m "AI Agent executed request from Issue #${{ github.event.issue.number }}"
-          git push
+      # The action reads the issue through the GitHub API, so issue text is never
+      # interpolated into a shell step. It works on a new branch and links a PR
+      # from its issue comment.
+      - name: Run Claude Code on the issue
+        uses: anthropics/claude-code-action@925afb53776cf1a2b738c6bdbed37b4d4000ef13 # v1.0.262
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          label_trigger: build-feature
+          claude_args: --max-turns 40
