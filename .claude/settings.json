@@ -5,6 +5,9 @@
       "Skill(reverse-engineer-anything)"
     ]
   },
+  "enabledPlugins": {
+    "superpowers@anthropic-plugin-directory": true
+  },
   "hooks": {
     "SessionStart": [
       {
