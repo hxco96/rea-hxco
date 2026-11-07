@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { PointerFixups } from "./AppleMachoFixups.js";
+import { parsePointerFixups } from "./AppleMachoFixups.js";
 import type { MachoLayout } from "./AppleMachoSelection.js";
 import { inspectObjcClassImportBindings } from "./AppleObjcClassImportBindings.js";
 
@@ -15,7 +16,10 @@ const createInput = (
     issues: [],
     examined: 1,
     decoded: 1,
+    legacyRebaseStreams: 0,
+    legacyBindStreams: 0,
     unreadRebaseBytes: 0,
+    hasUnresolvedLegacyBytes: () => false,
     decode: (address) =>
       address === 0x1000n
         ? {
@@ -133,6 +137,39 @@ describe("Objective-C import binding address inspection", () => {
     });
   });
 
+  it("marks selected slots partial when legacy rebase ownership is unknown", () => {
+    const input = createInput();
+    const streams = Buffer.from([0x20, 0x80, 0]); // Truncated rebase operand; valid bind DONE.
+    const fixups = parsePointerFixups(
+      streams,
+      {
+        chained: null,
+        binds: [{ offset: 2, size: 1, stream: "bind" }],
+        rebases: [{ offset: 0, size: 2 }],
+        dylibs: [],
+      },
+      [{ address: 0x1000n, size: 0x1000n, offset: 0, executable: false }],
+      0n,
+    );
+    expect(
+      inspectObjcClassImportBindings({
+        ...input,
+        addresses: ["0x1000"],
+        fixups,
+      }),
+    ).toMatchObject({
+      bindings: [],
+      coverage: {
+        status: "partial",
+        reason: expect.stringContaining(
+          "LC_DYLD_INFO pointer-fixup applicability was not completely decoded",
+        ),
+        examined: 1,
+        decoded: 0,
+      },
+    });
+  });
+
   it("does not infer absent imports from unsupported fixup coverage", () => {
     const input = createInput({
       fixups: { ...createInput().fixups, kind: "none" },
@@ -164,5 +201,26 @@ describe("Objective-C import binding address inspection", () => {
         reason: expect.stringContaining("max_records limit"),
       },
     });
+  });
+
+  it("keeps an explicitly truncated empty candidate scan partial", () => {
+    expect(
+      inspectObjcClassImportBindings(
+        createInput({ addresses: [], addressesComplete: false }),
+      ),
+    ).toMatchObject({
+      bindings: [],
+      coverage: {
+        status: "partial",
+        examined: 0,
+        decoded: 0,
+        reason: expect.stringContaining("max_records limit"),
+      },
+    });
+    expect(
+      inspectObjcClassImportBindings(
+        createInput({ addresses: [], addressesComplete: true }),
+      ).coverage,
+    ).toMatchObject({ status: "not_requested", reason: null, examined: 0 });
   });
 });
