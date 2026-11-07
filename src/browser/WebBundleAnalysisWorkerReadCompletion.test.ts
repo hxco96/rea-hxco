@@ -47,7 +47,7 @@ vi.mock("node:fs/promises", async (importOriginal) => {
 });
 
 import { createWebTextArtifact } from "../domain/webContentArtifact.js";
-import type { IncludedScript } from "../domain/webBundleAnalyzerInspection.js";
+import type { IncludedScript } from "../domain/webBundleAnalyzerState.js";
 import { ProviderCleanupError } from "../domain/providerCleanupError.js";
 import { cleanupOwnedProcessGroup } from "../process/ProcessOwnership.js";
 import {
@@ -144,7 +144,6 @@ it("retains completed facts and resolves a result-file lease through another cle
       makeScript("fetch('/retained');"),
       10_000,
     );
-    expect(result.ok).toBe(false);
     if (result.ok) throw new Error("Expected retained result cleanup failure");
     expect(result.error.completed).toMatchObject({
       status: "analyzed",
