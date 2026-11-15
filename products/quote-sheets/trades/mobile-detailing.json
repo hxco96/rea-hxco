@@ -1,0 +1,18 @@
+{
+  "id": "mobile-detailing",
+  "name": "Mobile Car Detailing",
+  "trade": "mobile detailing",
+  "customerWord": "vehicle",
+  "settings": { "labourCostPerHour": 20, "travelCostPerMile": 0.7, "travelChargePerMile": 1.0, "taxRate": 0.0, "minimumCharge": 60, "targetMargin": 0.5 },
+  "services": [
+    { "name": "Exterior wash and dry", "unit": "vehicle", "price": 45, "minutes": 40, "materials": 3 },
+    { "name": "Full interior detail", "unit": "vehicle", "price": 120, "minutes": 120, "materials": 8 },
+    { "name": "Wax or sealant", "unit": "vehicle", "price": 60, "minutes": 45, "materials": 6 },
+    { "name": "Clay bar treatment", "unit": "vehicle", "price": 50, "minutes": 40, "materials": 4 },
+    { "name": "Headlight restoration", "unit": "pair", "price": 70, "minutes": 50, "materials": 7 },
+    { "name": "Pet hair removal", "unit": "vehicle", "price": 40, "minutes": 35, "materials": 2 },
+    { "name": "Engine bay clean", "unit": "vehicle", "price": 45, "minutes": 30, "materials": 4 },
+    { "name": "Odour treatment", "unit": "vehicle", "price": 35, "minutes": 25, "materials": 5 }
+  ],
+  "keywords": ["car detailing quote", "auto detailing estimate", "detailing price calculator", "mobile detailer template", "detail business profit"]
+}

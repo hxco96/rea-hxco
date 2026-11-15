@@ -1,0 +1,16 @@
+{
+  "name": "quote-sheets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Generates trade-specific job-quote and profit spreadsheets (xlsx) plus Etsy listing kits.",
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.js",
+    "listings": "node src/listing.js",
+    "previews": "node src/previews.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": { "exceljs": "4.4.0" },
+  "license": "UNLICENSED"
+}
