@@ -1,0 +1,21 @@
+{
+  "actorSpecification": 1,
+  "name": "package-safety-check",
+  "title": "Package Safety Check for AI Coding Agents",
+  "description": "Checks npm and PyPI packages for hallucinated names, lookalikes, new publishers and install scripts before an agent installs them.",
+  "version": "0.1",
+  "dockerfile": "./Dockerfile",
+  "input": "./input_schema.json",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "Results",
+          "transformation": { "fields": ["ecosystem", "name", "verdict", "riskScore", "recommendation"] },
+          "display": { "component": "table" }
+        }
+      }
+    }
+  }
+}

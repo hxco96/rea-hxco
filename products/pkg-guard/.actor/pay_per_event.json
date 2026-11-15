@@ -1,0 +1,7 @@
+{
+  "package-check": {
+    "eventTitle": "Package checked",
+    "eventDescription": "One package safety report.",
+    "eventPriceUsd": 0.005
+  }
+}
