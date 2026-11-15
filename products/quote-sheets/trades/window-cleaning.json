@@ -1,0 +1,17 @@
+{
+  "id": "window-cleaning",
+  "name": "Window Cleaning",
+  "trade": "window cleaning",
+  "customerWord": "property",
+  "settings": { "labourCostPerHour": 20, "travelCostPerMile": 0.7, "travelChargePerMile": 0.0, "taxRate": 0.0, "minimumCharge": 80, "targetMargin": 0.6 },
+  "services": [
+    { "name": "Exterior window, standard pane", "unit": "pane", "price": 6, "minutes": 4, "materials": 0.15 },
+    { "name": "Interior window, standard pane", "unit": "pane", "price": 5, "minutes": 3, "materials": 0.15 },
+    { "name": "Large or hard-to-reach pane", "unit": "pane", "price": 12, "minutes": 8, "materials": 0.3 },
+    { "name": "Screen cleaning", "unit": "screen", "price": 2.5, "minutes": 2, "materials": 0.1 },
+    { "name": "Track and sill detailing", "unit": "window", "price": 4, "minutes": 3, "materials": 0.2 },
+    { "name": "Second-storey surcharge", "unit": "job", "price": 30, "minutes": 15, "materials": 0 },
+    { "name": "Post-construction cleanup", "unit": "hour", "price": 55, "minutes": 60, "materials": 3 }
+  ],
+  "keywords": ["window cleaning quote", "window cleaner estimate", "pricing calculator", "window business profit", "window job cost sheet"]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "junk-removal",
+  "name": "Junk Removal",
+  "trade": "junk removal",
+  "customerWord": "job",
+  "settings": { "labourCostPerHour": 22, "travelCostPerMile": 0.9, "travelChargePerMile": 1.5, "taxRate": 0.0, "minimumCharge": 95, "targetMargin": 0.45 },
+  "services": [
+    { "name": "Truck load, quarter", "unit": "load", "price": 175, "minutes": 60, "materials": 20 },
+    { "name": "Truck load, half", "unit": "load", "price": 325, "minutes": 100, "materials": 40 },
+    { "name": "Truck load, full", "unit": "load", "price": 575, "minutes": 150, "materials": 70 },
+    { "name": "Single bulky item (couch, mattress)", "unit": "item", "price": 75, "minutes": 20, "materials": 15 },
+    { "name": "Appliance with disposal rules", "unit": "item", "price": 90, "minutes": 25, "materials": 30 },
+    { "name": "Stairs or long carry surcharge", "unit": "job", "price": 40, "minutes": 20, "materials": 0 },
+    { "name": "Sweep and tidy after removal", "unit": "job", "price": 25, "minutes": 15, "materials": 0 }
+  ],
+  "keywords": ["junk removal quote", "hauling estimate template", "junk pricing calculator", "junk business profit", "hauling job cost sheet"]
+}

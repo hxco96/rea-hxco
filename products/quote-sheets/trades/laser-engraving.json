@@ -1,0 +1,17 @@
+{
+  "id": "laser-engraving",
+  "name": "Laser Engraving",
+  "trade": "laser engraving",
+  "customerWord": "order",
+  "settings": { "labourCostPerHour": 18, "travelCostPerMile": 0.7, "travelChargePerMile": 0.0, "taxRate": 0.07, "minimumCharge": 25, "targetMargin": 0.55 },
+  "services": [
+    { "name": "Setup and artwork prep", "unit": "job", "price": 15, "minutes": 20, "materials": 0 },
+    { "name": "Engrave small item (coaster, keychain)", "unit": "item", "price": 6, "minutes": 6, "materials": 1.5 },
+    { "name": "Engrave medium item (cutting board, plaque)", "unit": "item", "price": 22, "minutes": 18, "materials": 7 },
+    { "name": "Engrave drinkware", "unit": "item", "price": 18, "minutes": 12, "materials": 6 },
+    { "name": "Cut and engrave sign", "unit": "item", "price": 35, "minutes": 30, "materials": 9 },
+    { "name": "Custom design time", "unit": "hour", "price": 40, "minutes": 60, "materials": 0 },
+    { "name": "Rush fee", "unit": "job", "price": 20, "minutes": 10, "materials": 0 }
+  ],
+  "keywords": ["laser engraving pricing", "engraving quote template", "laser business calculator", "etsy laser pricing", "engraver profit sheet"]
+}
