@@ -1,0 +1,22 @@
+{
+  "title": "Package Safety Check",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "packages": {
+      "title": "Packages",
+      "type": "array",
+      "description": "Package names. Prefix with npm: or pypi: (for example npm:lodash, pypi:requests).",
+      "editor": "stringList",
+      "prefill": ["npm:lodash", "pypi:requests"]
+    },
+    "defaultEcosystem": {
+      "title": "Default ecosystem",
+      "type": "string",
+      "description": "Used for names without a prefix.",
+      "enum": ["npm", "pypi"],
+      "default": "npm"
+    }
+  },
+  "required": ["packages"]
+}

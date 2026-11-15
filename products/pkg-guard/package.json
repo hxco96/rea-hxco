@@ -1,0 +1,35 @@
+{
+  "name": "pkg-guard",
+  "version": "0.1.0",
+  "description": "Package safety check for AI coding agents: existence, age, typosquat distance, maintainer changes and install scripts for npm and PyPI packages.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "pkg-guard": "src/cli.js",
+    "pkg-guard-mcp": "src/mcp/server.js"
+  },
+  "scripts": {
+    "check": "node src/cli.js",
+    "serve": "node src/api/node.js",
+    "mcp": "node src/mcp/server.js",
+    "actor": "node src/actor/main.js",
+    "smoke": "bash scripts/smoke.sh",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "dependencies": {
+    "@coinbase/x402": "^2.1.0",
+    "@hono/node-server": "^1.19.0",
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "@x402/core": "^2.31.0",
+    "@x402/evm": "^2.31.0",
+    "@x402/extensions": "^2.31.0",
+    "@x402/hono": "^2.31.0",
+    "apify": "^3.5.0",
+    "hono": "^4.10.0",
+    "zod": "^3.25.0"
+  }
+}
